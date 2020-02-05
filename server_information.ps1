@@ -9,9 +9,13 @@ if ($answer -ne "N") {
     notepad $server_file
     Read-Host "After saving, hit [ENTER] to continue"
 }
+function Get_serverinformation($Each_server){
+    #Insert code here
+}
 $servers=$(get-content $server_file | ? {$_.trim() -ne "" } | Foreach {$_.TrimEnd()})
 $servers | ForEach {
   $Each_server=$_
   $OUTPUT_Serverinfo=$(Get_serverinformation($Each_server))
+  $OUTPUT_Serverinfo++
 }
 $OUTPUT_Serverinfo | Export-Csv -Path $root_path\$date_serverinfo.csv
