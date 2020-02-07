@@ -35,7 +35,7 @@ Write-Host "
 # other variables
 $date=$(Get-Date -format "ddMMMyyyy")
 $server_list="$root_path\server_list.txt"
-$output = "$root_path\"+"$env:computername"+"_server_software_installed"+"_"+"$date"+".csv"
+$output = "$root_path"+"$env:computername"+"_server_software_installed"+"_"+"$date"+".csv"
 
 # Collect information on $Each_server and return the value as $software_inventory 
 function Get_serverinformation($Each_server){
