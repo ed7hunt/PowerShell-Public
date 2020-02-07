@@ -1,3 +1,5 @@
+# To run this script remotely from the web, use:
+# Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/server_software_installed.ps1).Content
 # Modify the path below to this program's location on your computer
 $root_path = "C:\Users\$env:USERNAME\Desktop\"
 
@@ -33,11 +35,17 @@ Write-Host "
 # other variables
 $date=$(Get-Date -format "ddMMMyyyy")
 $server_list="$root_path\server_list.txt"
-$output = "$root_path"+"$env:computername"+"_server_software_installed"+"_"+"$date"+".csv"
+$output = "$root_path\"+"$env:computername"+"_server_software_installed"+"_"+"$date"+".csv"
 
 # Collect information on $Each_server and return the value as $software_inventory 
 function Get_serverinformation($Each_server){
-    $software_inventory=$(Get-WmiObject -Class Win32reg_AddRemovePrograms -Namespace root/cimv2 -ComputerName $Each_server | Select DisplayName,Version | Sort DisplayName)
+    $software_inventory = "" | Select DisplayName,Version,OS_Name,OS_Version
+    $software_installed=$(Get-WmiObject -Class Win32reg_AddRemovePrograms -Namespace root/cimv2 -ComputerName $Each_server | Select DisplayName,Version | Sort DisplayName)
+    $OS=$(Get-WmiObject -Class Win32_OperatingSystem -Namespace root/cimv2 -ComputerName $Each_server | Select-Object -Property Name,Version)
+    $software_inventory.DisplayName=$($software_installed.Displayname | Out-String)
+    $software_inventory.Version=$($software_installed.Version | Out-String)
+    $software_inventory.OS_Name=$($OS.Name -replace '\|C:\\Windows\|\\Device\\Harddisk\d{1}\\Partition\d{1}','')
+    $software_inventory.OS_Version=$OS.Version
     return $software_inventory
 }
 
@@ -60,7 +68,7 @@ switch (Read-Host "Enter your choice. Default = [2] ?") {
 echo 'SEP=,' | Out-File -FilePath $output -Force
 
 # Create header for CSV file
-echo """Hostname"",""Software Installed"",""Version""" | Out-File -Append $output
+echo """Hostname"",""Software Installed"",""Version"",""OS Name"",""OS Version""" | Out-File -Append $output
 
 # Loop through each server and export output into CSV file
 $servers | ForEach {
@@ -68,7 +76,8 @@ $servers | ForEach {
   $OUTPUT_Serverinfo=$(Get_serverinformation($Each_server))
   $DisplayName=$($OUTPUT_Serverinfo.DisplayName | Out-String)
   $Version=$($OUTPUT_Serverinfo.Version | Out-String)
-  echo """$Each_server"",""$DisplayName"",""$Version""" | Out-File -Append $output
+  $OS_Name=$($OUTPUT_Serverinfo.OS_Name | Out-String)
+  $OS_Version=$($OUTPUT_Serverinfo.OS_Version | Out-String)
+  echo """$Each_server"",""$DisplayName"",""$Version"",""$OS_Name"",""$OS_Version""" | Out-File -Append $output
 } 
 Write-Host "CSV File generated. Target file location = $output" -ForegroundColor Green
-
