@@ -10,8 +10,3 @@ Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/P
 If you want to connect with me on linked in...
 https://www.linkedin.com/in/edwardhunt4/
 
-My resume can be downloaded here...
-https://drive.google.com/open?id=1hWwYClLdc1BZFeuGFyU2CULnSrb3AkDI
-
-To make payment, send Bitcoin to my wallet: 3PAaQ3H3jNp171sZjjTYmsqPkwXtL46RWZ
-
