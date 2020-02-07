@@ -12,9 +12,10 @@ $root_path = "C:\Users\$env:USERNAME\Desktop\"
 #other variables
 $date=$(Get-Date -format "ddMMMyyyy")
 $server_file="$root_path\server_list.txt"
-
+#
 function Get_serverinformation($Each_server){
-    #Insert code here
+    $software_inventory=$(Get-WmiObject -Class Win32reg_AddRemovePrograms -Namespace root/cimv2 -ComputerName $Each_server | Select DisplayName,Version | Sort DisplayName)
+    return $software_inventory
 }
 #Get environment information
 Write-Host "Which describes your scenario?"
