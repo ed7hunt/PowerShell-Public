@@ -4,7 +4,7 @@
 $root_path = "C:\Users\$env:USERNAME\Desktop\"
 Write-Host "
        Title: Server Software Installed"
-$version="1.0"
+$version="1.1"
 Write-Host "     Version: $version
       Author: Edward Hunt
      Website: https://www.linkedin.com/in/edwardhunt4/
