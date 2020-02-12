@@ -8,7 +8,7 @@ $version="1.1"
 Write-Host "     Version: $version
       Author: Edward Hunt
      Website: https://www.linkedin.com/in/edwardhunt4/
-        Date: February 7, 2019
+        Date: February 7, 2020
 Requirements: Your server OS >= Windows 2008, Windows 10
               AT&T: Enable Firewall rules to allow WMI (TCP ports 135) from present location to the server
               Server: Allow TCP port 135 from your VLAN location to all servers on the server_list
