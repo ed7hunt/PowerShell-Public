@@ -142,7 +142,7 @@ $servers | ForEach {
     catch {
         $ERROR_MESSAGE=$_.Exception.Message
         If ($ERROR_MESSAGE -like "*period of time*") {
-            $Roadblocks="TCP Port 135 TIMESOUT. You are blocked by a firewall."
+            $Roadblocks="TCP Port 135 TIMESOUT. Server might be offline or you could be blocked by a firewall."
             Write-Host "$Each_server : $Roadblocks" -ForegroundColor Red
         }
         ElseIf ($ERROR_MESSAGE -like "*refused*") {
