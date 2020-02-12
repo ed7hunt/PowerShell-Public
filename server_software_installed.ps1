@@ -69,7 +69,7 @@ function Get_serverinformation($Each_server){
         $software_inventory.OS_Version=$OS.Version
         $software_inventory.HotFixID=$($OS_patches.HotFixID)
         $software_inventory.Description=$($OS_patches.Description)
-        $software_inventory.InstalledOn=$($OS_patches.InstalledOn) # | Get-Date -format "MMM dd, yyyy")
+        $software_inventory.InstalledOn=$($OS_patches.InstalledOn)
         Write-Host " Script collected output successfully." -ForegroundColor Green
     }
     catch {
