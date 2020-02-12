@@ -15,7 +15,7 @@ Requirements: Your server OS >= Windows 2008, Windows 10
               Server_List: Must contain either FQDN (Fully Qualified Domain Names) or IP Addresses
               Permissions: You may need Administrator access to each server in server_list if you are 
               running GET-WMIobject remotely from your jumpserver/workstation location.
-  Exceptions: For each target server in server_list, this script will not output results if TCP ports 135,445 are 
+  Exceptions: For each target server in server_list, this script will not output results if TCP ports 135 are 
               not open. If you get an error in which the RPC server is unavailable, you may need to update
               Windows .NET (use Google to figure out what is needed). For each exception, you will have 
               to go back to each server and manually run the script for problem determination and troubleshooting.
