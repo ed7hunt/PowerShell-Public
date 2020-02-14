@@ -1,5 +1,14 @@
 # If this file were public, you may run this script remotely from GitHub using this command:
 # Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/update_powershell.ps1).Content
+#
+# If you work in place such as ours in which the "POWERS THAT BE" do not want you running scripts over the network, you may find that
+# PowerShell might not be enabled. Your execution policies could be disabled by group-policy: either on your computer, user account or 
+# both. This script is valuable to some because you can undo the security policy that was created to "keep you safe". It would be wise 
+# to seek approval by your security offials before running this script.
+# 
+# Be cautious about updating .NET if you are confronted with this scenario. You may be successful in updating it; but end up breaking
+# applications that may be dependent upon it in a server related environment. With that being said, good luck!
+
 Clear
 Write-Host "
        Title: Update Powershell"
