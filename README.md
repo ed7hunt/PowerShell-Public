@@ -1,5 +1,3 @@
-import _config.yml
-
 # PowerShell-and-PowerGUI
 Windows Powershell stuff
 
