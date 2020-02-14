@@ -25,14 +25,14 @@ If ($Elevated_Privileges) {
         Write-Host "Below is the version of PowerShell installed on your computer:"
         $PSVersionTable
         Update-Module
-        Write-Host "Follow the instructions on how to update PowerShell. Launching IE...`n" -ForegroundColor Green
+        Write-Host "`nFollow the instructions shown in Internet Explorer on how to update PowerShell. Launching IE...`n" -ForegroundColor Yellow
         $InternetExplorer=new-object -com internetexplorer.application
         $InternetExplorer.navigate2("https://docs.microsoft.com/en-us/powershell/scripting/install/installing-windows-powershell?view=powershell-6")
         $InternetExplorer.visible=$true
     }
     Write-Host "Checking your Execution policies... " -ForegroundColor Green
     $EPout=$(Get-ExecutionPolicy -List)
-    Write-Host $EPout -ForegroundColor Cyan
+    Write-Host $($EPout | Out-String) -ForegroundColor Cyan
     If (($EPout[3].ExecutionPolicy -ne "RemoteSigned") -and ($EPout[4].ExecutionPolicy -ne "Unrestricted")) {
            Write-Host "Listing Execution policy BEFORE making changes..."
            Read-Host "Hit [ENTER] to continue"
@@ -42,15 +42,16 @@ If ($Elevated_Privileges) {
            Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force
            $ErrorActionPreference="stop"
            Write-Host "Listing Execution policy AFTER making changes..."
-           $EPout=$(Get-ExecutionPolicy -List | Out-String)
-           Write-Host $EPout -ForegroundColor Cyan
+           Write-Host $(Get-ExecutionPolicy -List | Out-String) -ForegroundColor Cyan
     }
     Else { Write "No changes are needed for your Execution Policies." }
-    $update_modules=$(Read-Host "To update PowerShell modules type 'Y', else hit [ENTER]")
+    $update_modules=$(Read-Host "Would you like to update PowerShell modules?  [Y] or [N]")
     If ($update_modules -eq "Y") {
-        "Microsoft.Powershell.Management","Get-WmiObject","TCPClient","SqlServer","ServerManager","ActiveDirectory","Microsoft.Powershell.Management" | Foreach { Get-Module $_ }
+        $ErrorActionPreference="silentlycontinue"
+        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Get-Module $_ }
+        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Install-Module $_ }
+        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Update-Module $_ }
     }
-    Start-Sleep -s 5
     Write-Host "`nComplete."
 }
 Else {
