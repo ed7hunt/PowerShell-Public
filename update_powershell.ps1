@@ -20,7 +20,7 @@ Write-Host "     Version: $version
      Purpose: The purpose of this script is to:
               a) Enable Execution Policies so your PowerShell scripts can run.
               b) Update your PowerShell versions to the latest levels.
-              c) Install common Windows PowerShell modules that System Administrators commonly use.
+              c) Install useful Windows PowerShell modules that System Administrators commonly use.
 Requirements: Your source OS should be >= Windows 10, Server 2012 + up"
 Write-Host "              This script should be run as Administrator. Use [SHIFT] + [RIGHT MOUSE CLICK], 'Run as Administrator'`n"
 $Elevated_Privileges=$([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator" )
