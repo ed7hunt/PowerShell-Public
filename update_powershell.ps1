@@ -16,7 +16,7 @@ $version="1.1"
 Write-Host "     Version: $version
       Author: Edward Hunt
         Dept: Infrastructure Technology Division
-        Date: Feb 14, 2020
+        Date: February 14, 2020
      Purpose: The purpose of this script is to:
               a) Enable Execution Policies so your PowerShell scripts can run.
               b) Update your PowerShell versions to the latest levels.
