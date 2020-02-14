@@ -1,5 +1,5 @@
 # If this file were public, you may run this script remotely from GitHub using this command:
-# Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/update_modules.ps1).Content
+# Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/update_powershell.ps1).Content
 Clear
 Write-Host "
        Title: Update Powershell"
