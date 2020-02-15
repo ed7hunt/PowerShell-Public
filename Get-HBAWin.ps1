@@ -1,3 +1,5 @@
+Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/update_powershell.ps1).Content
+
 # Written by Edward Hunt, DOR Infrastructure Supervisor
 # Purpose: This script will list the WWNs from HBA info which is needed for adding SAN Luns.
 # November 19, 2018
