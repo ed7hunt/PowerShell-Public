@@ -1,14 +1,10 @@
 # Written by Edward Hunt, DOR Infrastructure Supervisor
+# Purpose: This script will list the WWNs from HBA info which is needed for adding SAN Luns.
 # November 19, 2018
 # Directions:
-#  1) Download this PowerShell script to retrieve the Fiber-Channel WWNs on your Window's Server: 
-#     //vdor-prod-01/Software/PowerShell/SAN_request/Get-HBAWin.ps1
-#  2) Copy "Get-HBAWin.ps1" on the remote server. 
-#  3) Run the script with your bang account using PowerShell or ISE. 
-#  4) The output will be located on the server's desktop in CSV format. 
-#  5) Fill out and copy the WWNs into the vendor's spreadsheet to submit the GETS SAN request: 
-#     https://qtraining.gets.georgia.gov/SRMDocs/SAN_Request _Template_v1.doc 
-#  6) Remove "Get-HBAWin.ps1" from the server after you run it.
+#  1) Download this PowerShell script to retrieve the Fiber-Channel WWNs for your Window's Server. 
+#  2) Run the script with your administrator account in PowerShell ISE.
+#  3) The output will be located on the server's desktop in CSV format. 
 
 param(  
 [String[]]$ComputerName = $ENV:ComputerName, 
