@@ -18,7 +18,7 @@ $My_password = ""
 
 #SMTP Variables
 #$SMTPServer = "smtp.office365.com"
-$SMTPServer = "smtp.gets.ga.gov"
+$SMTPServer = ""
 #$SMTP_Port = "587"
 $SMTP_Port = "25"
 
