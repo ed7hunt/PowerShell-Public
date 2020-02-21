@@ -13,8 +13,7 @@ Requirements: 1) Firewall must be allowed from HOST to SMTP Server.
               3) Your HOST must be whitelisted on the SMTP Server.`n"
 
 # You may populate these variables per your agency's security policy
-$My_userid = "!ehunt"
-$My_email = "edward.huntiv@dor.ga.gov"
+$My_email = ""
 $My_password = ""
 
 #SMTP Variables
