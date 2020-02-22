@@ -7,24 +7,19 @@ Write-Host "
         Date: February 21, 2020
       Author: Edward Hunt
        Title: Information Technology Division Supervisor
-Requirements: 1) Firewall must be allowed from HOST to SMTP Server.
-              2) A valid email account and password is needed on the SMTP Server.
-                 or
-              3) Your HOST must be whitelisted on the SMTP Server.`n"
+Requirements: TCP ports 25 and/or 587 must be allowed through the firewall from HOST to SMTP Server. 
+     Outputs: You will receive EMAIL #1 if you have a valid email account and password on the SMTP server.
+              You will recevie EMAIL #2 if your HOST is whitelisted on the SMTP server.`n"
 
-# You may populate these variables per your agency's security policy
-$My_email = ""
-$My_password = ""
+# You should modify/populate these variables per your company/agency security policy
+$No_reply = "noreply@yourcompany.com"
+$My_email = "your_email@yourcompany.com"
+$My_password = "yourpassword"
 
-#SMTP Variables
-#$SMTPServer = "smtp.office365.com"
+# SMTPServers: smtp.office365.com, ...
 $SMTPServer = ""
-#$SMTP_Port = "587"
+# Valid SMTP ports are 25,587
 $SMTP_Port = "25"
-
-#Dynamic variables
-$do_another="Y"
-$username,$Userinfo=""
 
 Function store_credentials ($blob, $user, $password) {
     Write-Host "Please enter your $blob and password in the credential widget..." -ForegroundColor Yellow
@@ -53,10 +48,12 @@ Function send_an_email {
     $To_email=$(Read-Host "Enter CC email address (if applicable)")
     Try {
         If ($To_email -eq "") {
-            Send-MailMessage -To $($email_credentials.UserName) -From $email_credentials.Username -Subject "IT WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br><br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -Credential $email_credentials -UseSsl
+            Send-MailMessage -To $($email_credentials.UserName) -From $email_credentials.Username -Subject "EMAIL #1 WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br>Authentication Method:  Validated credentials<br><br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -Credential $email_credentials -UseSsl
+            Send-MailMessage -To $($email_credentials.UserName) -From $No_reply -Subject "EMAIL #2 WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br>Authentication Method:  No credentials.<br><br> If you received this email, it means the server has been <b>successfully whitelisted on $SMTPServer</b>.<br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -UseSsl
         }
         Else {
-            Send-MailMessage -To $To_email -Cc $($email_credentials.UserName) -From $email_credentials.Username -Subject "IT WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br><br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -Credential $email_credentials -UseSsl
+            Send-MailMessage -To $To_email -Cc $($email_credentials.UserName) -From $email_credentials.Username -Subject "EMAIL #1 WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br><br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -Credential $email_credentials -UseSsl
+            Send-MailMessage -To $To_email -Cc $($email_credentials.UserName) -From $No_reply -Subject "EMAIL #2 WORKS! an SMTP email was sent from $env:Computername.$env:USERDNSDOMAIN" -Body "Hello,<br><br>This is a test SMTP email validating that the server, <b>$env:Computername.$env:USERDNSDOMAIN</b> can send an email via SMTP through:<br><br>SERVER:  $SMTPServer<br>PORT:  $SMTP_port<br>Authentication Method:  No credentials.<br><br> If you received this email, it means the server has been <b>successfully whitelisted on $SMTPServer</b>.<br>This was verified via Edward Hunt's <font color='red'><b>Test SMTP Server</b></font> PowerShell script which is available to the general public at:<br><a href='http://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1'>https://github.com/ed7hunt/PowerShell-and-PowerGUI/blob/master/Test-SMTP-Server.ps1</a>:<br><br>Kindest regards,<br><br>The Infrastructure Team<br><a href='http://helpdesk:8081'>http://helpdesk:8081</a>" -BodyAsHtml -SMTPServer $SMTPServer -Port $SMTP_Port -UseSsl
         }
         Write-Host "Email sent!`n" -ForegroundColor Green
     }
