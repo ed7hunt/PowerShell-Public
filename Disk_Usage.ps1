@@ -1,10 +1,10 @@
 Clear
-$version=[string]"1.0"
+[string]$version="1.0"
 $rootpath="C:\Users\$env:USERNAME\Desktop\Disk Usage Check"
 Write-Host "
        Title: Disk_Usage
      Version: $version
-     Purpose: To querry disk usage for a server that is remote.
+     Purpose: To query disk usage for a server that is remote.
         Date: February 27, 2020
       Author: Edward Hunt
        Title: Information Technology Division Supervisor
