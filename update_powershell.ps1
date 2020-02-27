@@ -42,7 +42,7 @@ If ($Elevated_Privileges) {
     Write-Host "Checking your Execution policies... " -ForegroundColor Green
     $EPout=$(Get-ExecutionPolicy -List)
     Write-Host $($EPout | Out-String) -ForegroundColor Cyan
-    If (($EPout[3].ExecutionPolicy -ne "RemoteSigned") -and ($EPout[4].ExecutionPolicy -ne "Unrestricted")) {
+    If (($EPout[3].ExecutionPolicy -ne "RemoteSigned") -or ($EPout[4].ExecutionPolicy -ne "Unrestricted")) {
            Write-Host "Listing Execution policy BEFORE making changes..."
            Read-Host "Hit [ENTER] to continue"
            $ErrorActionPreference="silentlycontinue"
