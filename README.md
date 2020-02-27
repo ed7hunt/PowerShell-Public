@@ -1,4 +1,4 @@
-# PowerShell-and-PowerGUI
+# PowerShell
 Windows Powershell stuff
 
 update_powershell.ps1: This script updates your PowerShell to the latest version and enables execution policies so it will run. The setup may not be as easy as just running the script, you may need some extra troubleshooting, so use the ISE tool.
