@@ -3,6 +3,9 @@
 # also sets the preferred ciphers, cipher suites, and their preferred order.
 # Copyright 2014, Stephen Hodges
 
+# If this file were public, you may run this script remotely from GitHub using this command:
+# Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/Hardening_SSL.ps1).Content
+
 # Disable Multi-Protocol Unified Hello
 New-Item 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\Server' -Force 
 New-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Multi-Protocol Unified Hello\Server' -name Enabled -value 0 -PropertyType 'DWord' -Force 
