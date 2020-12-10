@@ -239,7 +239,7 @@ Requirements: Make sure the operating system and load balancer is compatible wit
     7 - Show all SCHANNEL settings
     8 - Backout all SCHANNEL settings
     9 - QUIT`n" -ForegroundColor yellow
-    switch (Read-Host "Which describes the TLS setting you prefer? Default = [4] ?") {
+    switch (Read-Host "Which describes the TLS setting you prefer? Default = [6] ?") {
         1 { $TLS="TLS 1.0"; disable $TLS; read-host "Continue [RETURN]" }
         2 { $TLS="TLS 1.1"; disable $TLS; read-host "Continue [RETURN]" }
         3 { $TLS="TLS 1.1"; enable $TLS; read-host "Continue [RETURN]" } 
@@ -249,6 +249,6 @@ Requirements: Make sure the operating system and load balancer is compatible wit
         7 { get-childitem "Registry::HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL" -Recurse; read-host "Continue [RETURN]" }
         8 { total_backout; read-host "Continue [RETURN]" }
         9 { $quit=$true }
-        default { $TLS="TLS 1.2"; enable; read-host "Continue [RETURN]" }
+        default {  HardeningScript; read-host "Continue [RETURN]" }
     }
 }
