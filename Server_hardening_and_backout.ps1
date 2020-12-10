@@ -1,4 +1,8 @@
-﻿
+# If this file were public, you may run this script remotely from GitHub using this command:
+# Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/Server_hardening_and_backout.ps1).Content
+
+Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ed7hunt/PowerShell-and-PowerGUI/master/update_powershell.ps1).Content
+
 function create_the_key ($TLS) {
     # Create the key and Disable it
     $global:My_path = "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\$TLS"
