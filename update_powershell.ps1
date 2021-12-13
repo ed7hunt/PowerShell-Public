@@ -7,16 +7,17 @@
 # wise to seek approval by your security officials or manager before running this script.
 # 
 # Be extremely cautious about updating .NET if you are confronted with this scenario. You may be successful in updating it; but end up
-# breaking applications that may be dependent upon it in a server related environment. With that being said, good luck!
+# breaking applications that may be dependent upon it in a server related environment. With that being said, back up your system first.
+# Good luck!
 
 Clear
 Write-Host "
        Title: Update Powershell"
-$version="1.1"
+$version="1.2"
 Write-Host "     Version: $version
       Author: Edward Hunt
-        Dept: Infrastructure Technology Division
-        Date: February 14, 2020
+        Dept: Senior System Engineer, Cybersecurity
+        Date: December 13, 2021
      Purpose: The purpose of this script is to:
               a) Enable Execution Policies so your PowerShell scripts can run.
               b) Update your PowerShell versions to the latest levels.
@@ -54,13 +55,40 @@ If ($Elevated_Privileges) {
            Write-Host $(Get-ExecutionPolicy -List | Out-String) -ForegroundColor Cyan
     }
     Else { Write "No changes are needed for your Execution Policies." }
-    $update_modules=$(Read-Host "Would you like to update PowerShell modules?  [Y] or [N]")
+    $update_modules=$(Read-Host "Would you like to update PowerShell modules and RSAT tools?  [Y] or [N]")
     If ($update_modules -eq "Y") {
-        $ErrorActionPreference="silentlycontinue"
-        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Get-Module $_ }
-        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Install-Module $_ }
-        "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Update-Module $_ }
-    }
+       $ErrorActionPreference="silentlycontinue"
+       "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Get-Module $_ }
+       "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Install-Module $_ }
+       "Microsoft.Powershell.Management","Microsoft.Powershell.Utility","SqlServer","ServerManager","ActiveDirectory" | Foreach { Update-Module $_ }
+       Write-Host "\nInstalling RSAT Tools...\n"
+       $RSAT_tools="Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0", 
+       "Rsat.BitLocker.Recovery.Tools~~~~0.0.1.0", 
+       "Rsat.CertificateServices.Tools~~~~0.0.1.0",
+       "Rsat.DHCP.Tools~~~~0.0.1.0",
+       "Rsat.Dns.Tools~~~~0.0.1.0",
+       "Rsat.FailoverCluster.Management.Tools~~~~0.0.1.0",
+       "Rsat.FileServices.Tools~~~~0.0.1.0",
+       "Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0",
+       "Rsat.IPAM.Client.Tools~~~~0.0.1.0",
+       "Rsat.LLDP.Tools~~~~0.0.1.0",
+       "Rsat.NetworkController.Tools~~~~0.0.1.0",
+       "Rsat.NetworkLoadBalancing.Tools~~~~0.0.1.0",
+       "Rsat.RemoteAccess.Management.Tools~~~~0.0.1.0",
+       "Rsat.RemoteDesktop.Services.Tools~~~~0.0.1.0",
+       "Rsat.ServerManager.Tools~~~~0.0.1.0",
+       "Rsat.Shielded.VM.Tools~~~~0.0.1.0",
+       "Rsat.StorageMigrationService.Management.Tools~~~~0.0.1.0",
+       "Rsat.StorageReplica.Tools~~~~0.0.1.0",
+       "Rsat.SystemInsights.Management.Tools~~~~0.0.1.0",
+       "Rsat.VolumeActivation.Tools~~~~0.0.1.0",
+       "Rsat.WSUS.Tools~~~~0.0.1.0"
+       $RSAT_tools | ForEach {
+              $each_module = $_
+              Write-Host "Installing: ",$each_module
+              Add-WindowsCapability -Online -Name $each_module
+              }
+       }
     Write-Host "`nComplete."
 }
 Else {
